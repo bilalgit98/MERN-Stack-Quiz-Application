@@ -6,7 +6,7 @@ function Main() {
   const inputRef = useRef(null);
   return (
     <div className="container">
-      <h1 className="title"> Quiz Application</h1>
+      <h1 className="title text-light"> Quiz Application</h1>
       <ol>
         <li> You will be asked 10 question one after another!</li>
         <li>You will be awarded 10 points for each correct answer</li>
