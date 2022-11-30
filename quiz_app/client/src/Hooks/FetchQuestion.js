@@ -4,7 +4,8 @@ import data from "../database/data";
 import * as Actions from "../redux/question_reducer";
 
 export const useFetchQuestion = () => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
+
   const [getData, setData] = useState({
     Loading: false,
     apiData: [],
@@ -19,7 +20,7 @@ export const useFetchQuestion = () => {
       try {
         let question = await data;
 
-        if (question.length >= 0) {
+        if (question.length > 0) {
           setData((state) => ({ ...state, Loading: false }));
           setData((state) => ({ ...state, apiData: question }));
 
@@ -30,7 +31,7 @@ export const useFetchQuestion = () => {
         }
       } catch (error) {
         setData((state) => ({ ...state, Loading: false }));
-        setData((state) => ({ ...state, serverError: true }));
+        setData((state) => ({ ...state, serverError: error }));
       }
     })();
   }, [dispatch]);
