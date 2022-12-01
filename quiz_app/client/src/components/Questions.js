@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 //custom hook
 import { useFetchQuestion } from "../Hooks/FetchQuestion";
 
-function Questions() {
+function Questions({ onChecked }) {
   const [checked, setChecked] = useState(undefined);
 
   const [{ Loading, apiData, serverError }] = useFetchQuestion();
@@ -17,8 +17,8 @@ function Questions() {
     console.log(questions);
   });
 
-  function onSelect() {
-    // console.log("button change");
+  function onSelect(i) {
+    onChecked(i);
   }
   if (Loading) return <h3 className="text-light">loading</h3>;
   if (serverError)
@@ -36,7 +36,7 @@ function Questions() {
               value={false}
               name="options"
               id={`q${index}-option`}
-              onChange={onSelect()}
+              onChange={() => onSelect(index)}
             />
 
             <label className="text-primary" htmlFor={`q${index}-option`}>
