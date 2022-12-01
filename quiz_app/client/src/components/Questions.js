@@ -12,7 +12,7 @@ function Questions({ onChecked }) {
   const [{ Loading, apiData, serverError }] = useFetchQuestion();
 
   const trace = useSelector((state) => state.questions.trace);
-
+  const result = useSelector((state) => state.results.result);
   const questions = useSelector((state) => state.questions.queue[trace]);
 
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ function Questions({ onChecked }) {
   function onSelect(i) {
     onChecked(i);
     setChecked(i);
+    dispatch(updateResultHook({ trace, checked }));
   }
 
   if (Loading) return <h3 className="text-light">loading</h3>;
@@ -48,7 +49,9 @@ function Questions({ onChecked }) {
             <label className="text-primary" htmlFor={`q${index}-option`}>
               {question}
             </label>
-            <div className="check"></div>
+            <div
+              className={`check ${result[trace] == index ? "checked" : ""}`}
+            ></div>
           </li>
         ))}
       </ul>
