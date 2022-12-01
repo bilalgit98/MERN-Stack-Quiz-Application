@@ -2,10 +2,18 @@ import React from "react";
 import "../styles/Result.css";
 import { Link } from "react-router-dom";
 import ResultTable from "./ResultTable";
+import { useDispatch } from "react-redux";
+import { ResetResult } from "../redux/result_reducer";
+import { ResetQuestions } from "../redux/question_reducer";
+
 function Results() {
+  const dispatch = useDispatch();
   function onRestart() {
+    dispatch(ResetQuestions());
+    dispatch(ResetResult());
     console.log("onrestart");
   }
+
   return (
     <div className="container">
       <h1 className="title text-light">Quiz Application </h1>

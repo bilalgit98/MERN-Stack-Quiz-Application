@@ -4,11 +4,14 @@ import Questions from "./Questions";
 import { useSelector, useDispatch } from "react-redux";
 import { MoveAction, MovePrevAction } from "../Hooks/FetchQuestion";
 import { pushAnswers } from "../Hooks/setResults";
+import { Navigate } from "react-router-dom";
 
 function Quiz() {
   const [check, setCheck] = useState(undefined);
 
   const state = useSelector((state) => state);
+  const result = useSelector((state) => state.results.result);
+
   const { trace, queue } = useSelector((state) => state.questions);
   const dispatch = useDispatch();
 
@@ -31,6 +34,11 @@ function Quiz() {
 
   function onChecked(check) {
     setCheck(check);
+  }
+
+  //finishing the quiz at the last question
+  if (result.length && result.length >= queue.length) {
+    return <Navigate to={"/result"} replace="true"></Navigate>;
   }
 
   return (
