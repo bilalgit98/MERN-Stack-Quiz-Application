@@ -1,3 +1,6 @@
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+
 function attemptsNumber(result) {
   return result.filter((r) => r !== undefined).length;
 }
@@ -14,5 +17,10 @@ function flagResults(totalPoints, earnPoints) {
   return (totalPoints * 50) / 100 < earnPoints;
 }
 
+function CheckUser({ children }) {
+  const auth = useSelector((state) => state.results.userId);
+  return auth ? children : <Navigate to={"/"} replace="true"></Navigate>;
+}
+
 export default attemptsNumber;
-export { earnPointNumber, flagResults };
+export { earnPointNumber, flagResults, CheckUser };

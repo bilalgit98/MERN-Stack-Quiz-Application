@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./Main";
 import Quiz from "./Quiz";
 import Results from "./Results";
+import { CheckUser } from "../helper/helper";
 
 const router = createBrowserRouter([
   {
@@ -11,11 +12,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/quiz",
-    element: <Quiz></Quiz>,
+    element: (
+      <CheckUser>
+        <Quiz />
+      </CheckUser>
+    ),
   },
   {
     path: "/result",
-    element: <Results></Results>,
+    element: (
+      <CheckUser>
+        <Results />
+      </CheckUser>
+    ),
   },
 ]);
 
