@@ -3,6 +3,7 @@ import Questions from "./Questions";
 
 import { useSelector, useDispatch } from "react-redux";
 import { MoveAction, MovePrevAction } from "../Hooks/FetchQuestion";
+import { pushAnswers } from "../Hooks/setResults";
 
 function Quiz() {
   const state = useSelector((state) => state);
@@ -16,6 +17,7 @@ function Quiz() {
   function onNext() {
     if (trace < queue.length) {
       dispatch(MoveAction());
+      dispatch(pushAnswers(1));
     }
   }
 
