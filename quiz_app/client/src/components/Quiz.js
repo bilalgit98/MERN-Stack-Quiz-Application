@@ -15,10 +15,6 @@ function Quiz() {
   const { trace, queue } = useSelector((state) => state.questions);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(state);
-  });
-
   function onNext() {
     if (trace < queue.length) {
       dispatch(MoveAction());
@@ -27,6 +23,8 @@ function Quiz() {
         dispatch(pushAnswers(check));
       }
     }
+
+    setCheck(undefined);
   }
 
   function onPrev() {
