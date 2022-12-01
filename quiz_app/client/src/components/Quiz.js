@@ -22,7 +22,10 @@ function Quiz() {
   function onNext() {
     if (trace < queue.length) {
       dispatch(MoveAction());
-      dispatch(pushAnswers(check));
+
+      if (result.length <= trace) {
+        dispatch(pushAnswers(check));
+      }
     }
   }
 
