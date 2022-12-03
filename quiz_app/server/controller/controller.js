@@ -1,14 +1,36 @@
+import Questions from "../models/questionSchema.js";
+import Results from "../models/resultSchema.js";
+import questions, { answers } from "../database/data.js";
 //questions
 export async function getQuestions(req, res) {
-  res.json("Questions Request");
+  try {
+    const question = await Questions.find();
+    res.json(question);
+  } catch (error) {
+    res.json({ error });
+  }
 }
 
 export async function insertQuestions(req, res) {
-  res.json("Questions Api Post Requests");
+  try {
+    Questions.insertMany(
+      { questions: questions, answer: answers },
+      function (error, data) {
+        res.json({ msg: "DATA SAVED" });
+      }
+    );
+  } catch (error) {
+    console.log({ error });
+  }
 }
 
 export async function deleteQuestions(req, res) {
-  res.json("Questions Api delete Requests");
+  try {
+    await Questions.deleteMany();
+    res.json({ msg: "DATA DELETED" });
+  } catch (error) {
+    res.json({ error });
+  }
 }
 
 //result
