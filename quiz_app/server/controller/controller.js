@@ -35,12 +35,33 @@ export async function deleteQuestions(req, res) {
 
 //result
 export async function getResult(req, res) {
-  res.json("result api get Requests");
+  try {
+    const result = await Results.find();
+    res.json(result);
+  } catch (error) {
+    res.json({ error });
+  }
 }
 export async function postResult(req, res) {
-  res.json("result api post Requests");
+  try {
+    const { username, result, attempts, points, achieved } = req.body;
+    if (!username && !result) throw new Error("DATA NOT PROVIDED!");
+    Results.create(
+      { username, result, attempts, points, achieved },
+      function (error, data) {
+        res.json({ msg: "Result SAVED" });
+      }
+    );
+  } catch (error) {
+    res.json({ error });
+  }
 }
 
 export async function deleteResult(req, res) {
-  res.json("result api delete Requests");
+  try {
+    await Results.deleteMany();
+    res.json({ msg: "Result Deleted" });
+  } catch (error) {
+    res.json({ error });
+  }
 }
