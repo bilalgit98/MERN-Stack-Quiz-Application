@@ -1,3 +1,4 @@
+//questions
 export async function getQuestions(req, res) {
   res.json("Questions Request");
 }
@@ -10,6 +11,7 @@ export async function deleteQuestions(req, res) {
   res.json("Questions Api delete Requests");
 }
 
+//result
 export async function getResult(req, res) {
   res.json("result api get Requests");
 }

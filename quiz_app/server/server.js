@@ -5,6 +5,8 @@ import { config } from "dotenv";
 import router from "./router/route.js";
 const app = express();
 
+//mongodb connection
+import connect from "./database/conn.js";
 // app middleware
 app.use(morgan("tiny"));
 app.use(cors());
@@ -26,6 +28,17 @@ app.get("/", (req, res) => {
   }
 });
 
-app.listen(PORT, () => [
-  console.log(`SERVER STARTED ON ${PORT}, "http://localhost:${PORT}" `),
-]);
+//starting server when valid connection to mongodb
+connect()
+  .then(() => {
+    try {
+      app.listen(PORT, () => [
+        console.log(
+          `SERVER STARTED ON PORT:${PORT}, "http://localhost:${PORT}" `
+        ),
+      ]);
+    } catch (error) {
+      console.log("SERVER CONNECTION FAILED");
+    }
+  })
+  .catch((error) => console.log("DATABASE CONNECTION FAILED"));

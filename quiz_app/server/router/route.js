@@ -13,7 +13,7 @@ router
   .delete(controller.deleteQuestions);
 
 router
-  .result("/result")
+  .route("/result")
   .get(controller.getResult)
   .post(controller.postResult)
   .delete(controller.deleteResult);
