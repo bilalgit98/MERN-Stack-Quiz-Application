@@ -42,7 +42,7 @@ function Results() {
       <div className="result flex-center">
         <div className="flex">
           <span>Username </span>
-          <span className="bold">ff</span>
+          <span className="bold">{userId}</span>
         </div>
 
         <div className="flex">
