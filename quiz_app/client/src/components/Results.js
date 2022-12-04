@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ResetResult } from "../redux/result_reducer";
 import { ResetQuestions } from "../redux/question_reducer";
 import attemptsNumber, { earnPointNumber, flagResults } from "../helper/helper";
+import { usePublishResult } from "../Hooks/setResults";
 
 function Results() {
   const dispatch = useDispatch();
@@ -20,15 +21,20 @@ function Results() {
   const earnPoints = earnPointNumber(result, answers, 10);
   const flag = flagResults(totalPoints, earnPoints);
 
+  //store user result
+  usePublishResult({
+    result,
+    username: userId,
+    attempts,
+    points: earnPoints,
+    achieved: flag ? "Passed" : "Failed",
+  });
+
   function onRestart() {
     dispatch(ResetQuestions());
     dispatch(ResetResult());
     console.log("onrestart");
   }
-
-  useEffect(() => {
-    console.log(earnPoints);
-  });
 
   return (
     <div className="container">

@@ -25,14 +25,20 @@ function CheckUser({ children }) {
 
 async function GetServerData(url, callback) {
   const data = await (await axios.get(url))?.data;
-  console.log(data);
+
   return callback ? callback(data) : data;
 }
 
 async function PostServerData(url, result, callback) {
-  const data = await (await axios.get(url, result))?.data;
+  const data = await (await axios.post(url, result))?.data;
   return callback ? callback(data) : data;
 }
 
 export default attemptsNumber;
-export { earnPointNumber, flagResults, CheckUser, GetServerData };
+export {
+  earnPointNumber,
+  flagResults,
+  CheckUser,
+  GetServerData,
+  PostServerData,
+};
